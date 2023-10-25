@@ -11,7 +11,7 @@ jobs:
       - name: Lint Repo
         run: npm run lint
   Test: 
-    needs: Test
+    needs: Lint
     runs-on: ubuntu-latest
     steps: 
       - name: Get Repo
