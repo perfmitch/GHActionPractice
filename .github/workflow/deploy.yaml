@@ -1,0 +1,19 @@
+name: Lint, Test, and Deploy
+  on: [push,workflow-dispatch]
+  jobs:
+    Build: 
+      runs-on: ubuntu-latest
+      steps: 
+        - name: Get Repo
+        - uses: actions/checkout@v3
+        - name: Install Node
+        - uses: actions/setup-node@v3
+          with: 
+            node-version: 18
+        - name: Build Project
+        - run: npm build
+    Lint: 
+      needs: Build
+      runs-on: ubuntu-latest
+        - name: Lint Repo
+        - run: npm lint
