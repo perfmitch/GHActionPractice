@@ -1,7 +1,7 @@
 name: Lint, Test, and Deploy
 on: [push, workflow_dispatch]
 jobs:
-  Build and Lint and Test: 
+  Build_Lint_Test: 
     runs-on: ubuntu-latest
     steps: 
       - name: Get Repo
@@ -16,10 +16,11 @@ jobs:
         run: npm run build
       - name: Lint Repo
         run: npm run lint
-      - name: 
+      - name: Test Repo
         run: npm run test
 
   Deploy: 
+    needs: Build_Lint_Test
     runs-on: ubuntu-latest
     steps: 
       - name: Deploy message
