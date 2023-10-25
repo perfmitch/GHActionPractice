@@ -1,7 +1,7 @@
 name: Lint, Test, and Deploy
 on: [push, workflow_dispatch]
 jobs:
-  Build: 
+  Build and Lint and Test: 
     runs-on: ubuntu-latest
     steps: 
       - name: Get Repo
@@ -14,9 +14,26 @@ jobs:
         run: npm ci
       - name: Build Project
         run: npm run build
-  Lint: 
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
       - name: Lint Repo
         run: npm run lint
+      - name: 
+        run: npm run test
+
+  Deploy: 
+   runs-on: ubuntu-latest
+    steps: 
+      - name: Deploy message
+        run: echo "Deploying Initiated"
+      - name: Get Repo
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 18
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build Project
+        run: npm run build
+      - name: Deploy ending message
+        run: echo "Deploying...."
+      
